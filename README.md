@@ -1,24 +1,8 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+LINEで夢の内容を送信するとAI(Gemini)による解釈を返信してくれるサービス。
 
-Things you may want to cover:
+Ruby 3.4.2
+Rails 8.0.2
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+<img src="https://github.com/user-attachments/assets/f1a3c1c9-8771-4602-830f-29aa590e749f" width="500">
