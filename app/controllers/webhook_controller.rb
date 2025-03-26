@@ -2,10 +2,13 @@ class WebhookController < ApplicationController
   skip_before_action :verify_authenticity_token
   before_action :validate_signature
   before_action :validate_message
+  before_action :validate_user
 
   def create
     puts "create action start"
     line_user_id = params[:events][0][:source][:userId]
+
+
     
     if BannedUser.banned?(line_user_id)
       reply_message("申し訳ありませんが、現在ご利用いただけません。")
@@ -61,6 +64,15 @@ class WebhookController < ApplicationController
     # テキストメッセージ以外はその旨を返信
     reply_message("申し訳ありませんが、テキストメッセージのみ対応しています。")
     head :ok # リクエスト元(LINE)に200を返して終了
+  end
+
+  # 許可されたLINE User IDかどうかをチェック
+  def validate_user
+    line_user_id = params[:events][0][:source][:userId]
+    unless line_user_id == ENV['ALLOWED_LINE_USER_ID']
+      reply_message("申し訳ありませんが、現在このサービスはご利用いただけません。")
+      head :ok # リクエスト元(LINE)に200を返して終了
+    end
   end
 
   # AIによる生成そのまま。フィルタリングをしたいんだろうけどこの方法では意味ない
