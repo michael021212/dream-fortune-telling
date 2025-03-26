@@ -30,11 +30,11 @@ class GeminiService
       req.url "#{GEMINI_API_URL}?key=#{@api_key}"
       req.headers["Content-Type"] = "application/json"
       req.body = {
-        contents: [{
-          parts: [{
+        contents: [ {
+          parts: [ {
             text: prompt
-          }]
-        }]
+          } ]
+        } ]
       }.to_json
     end
 
@@ -63,16 +63,16 @@ class GeminiService
   def parse_response(response)
     puts "response: #{response}"
     # "candidates" の配列が空でないことを確認
-    candidate = response['candidates']&.first
-    raise 'No candidate found in response' unless candidate
-  
+    candidate = response["candidates"]&.first
+    raise "No candidate found in response" unless candidate
+
     # "content" の中の "parts" を取得
-    parts = candidate.dig('content', 'parts')
-    raise 'No parts found in response' if parts.nil? || parts.empty?
+    parts = candidate.dig("content", "parts")
+    raise "No parts found in response" if parts.nil? || parts.empty?
 
     # "text" を取得
-    content = parts.first['text']
-    raise 'No text found in response' unless content.is_a?(String)
+    content = parts.first["text"]
+    raise "No text found in response" unless content.is_a?(String)
 
     # 正規表現を使って summary と interpretation を抽出
     summary_match = content.match(/\{summary:\s*(.*?)\}/m)
@@ -85,9 +85,9 @@ class GeminiService
     # 結果を出力
     puts "Summary:\n#{summary}\n\n"
     puts "Interpretation:\n#{interpretation}"
-  
-    raise Error, 'Failed to extract summary and interpretation' unless summary && interpretation
-  
+
+    raise Error, "Failed to extract summary and interpretation" unless summary && interpretation
+
     {
       summary: summary,
       interpretation: interpretation
@@ -95,4 +95,4 @@ class GeminiService
   rescue JSON::ParserError => e
     raise Error, "Failed to parse response: #{e.message}"
   end
-end 
+end

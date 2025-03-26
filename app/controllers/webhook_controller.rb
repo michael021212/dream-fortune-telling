@@ -9,7 +9,7 @@ class WebhookController < ApplicationController
     line_user_id = params[:events][0][:source][:userId]
 
 
-    
+
     if BannedUser.banned?(line_user_id)
       reply_message("申し訳ありませんが、現在ご利用いただけません。")
       return
@@ -21,7 +21,7 @@ class WebhookController < ApplicationController
     end
 
     message = params[:events][0][:message][:text]
-    
+
     if inappropriate_content?(message)
       UserLog.record_request(line_user_id)
       reply_message("不適切な内容が含まれています。内容を修正して再度お試しください。")
@@ -34,7 +34,7 @@ class WebhookController < ApplicationController
 
       # 開発用に利用制限をリセット
       UserLog.reset_warning_count(line_user_id)
-      
+
       reply_message(<<~MESSAGE)
         【簡単な解釈】
         #{interpretation[:summary]}
@@ -60,7 +60,7 @@ class WebhookController < ApplicationController
 
   def validate_message
     return true if params[:events]&.first&.dig(:message, :type) == "text"
-    
+
     # テキストメッセージ以外はその旨を返信
     reply_message("申し訳ありませんが、テキストメッセージのみ対応しています。")
     head :ok # リクエスト元(LINE)に200を返して終了
@@ -69,7 +69,7 @@ class WebhookController < ApplicationController
   # 許可されたLINE User IDかどうかをチェック
   def validate_user
     line_user_id = params[:events][0][:source][:userId]
-    unless line_user_id == ENV['ALLOWED_LINE_USER_ID']
+    unless line_user_id == ENV["ALLOWED_LINE_USER_ID"]
       reply_message("申し訳ありませんが、現在このサービスはご利用いただけません。")
       head :ok # リクエスト元(LINE)に200を返して終了
     end
@@ -91,4 +91,4 @@ class WebhookController < ApplicationController
     )
     head :ok
   end
-end 
+end
