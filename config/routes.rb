@@ -9,9 +9,9 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   post "webhook", to: "webhook#create"
-  
+
   namespace :admin do
-    resources :logs, only: [:index]
-    resources :banned_users, only: [:index, :create, :destroy]
+    resources :logs, only: [ :index ]
+    resources :banned_users, only: [ :index, :create, :destroy ]
   end
 end
