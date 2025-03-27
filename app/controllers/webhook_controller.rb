@@ -5,7 +5,6 @@ class WebhookController < ApplicationController
   before_action :validate_user
 
   def create
-    puts "create action start"
     line_user_id = params[:events][0][:source][:userId]
 
 
