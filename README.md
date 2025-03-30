@@ -1,10 +1,12 @@
 # README
 
 LINEで夢の内容を送信するとAI(Gemini)による解釈を返信してくれるサービス
+Cloud Run + Cloud Storage
 
 ```
 Ruby 3.4.2
 Rails 8.0.2
+SQLite3
 ```
 
 <img src="https://github.com/user-attachments/assets/0d14585f-34d2-4b91-abd2-075d2c198c48" width="500">
