@@ -2,8 +2,6 @@
 
 LINEで夢の内容を送信するとAI(Gemini)による解釈を返信してくれるサービス
 
-ほぼCursorのagent機能により生成されたコード
-
 ```
 Ruby 3.4.2
 Rails 8.0.2
