@@ -22,3 +22,5 @@ docker push asia-northeast1-docker.pkg.dev/$PROJECT_ID/$REPOSITORY_NAME/$SERVICE
 // Cloud Runの「新しいリビジョンの編集とデプロイ」からデプロイ
 https://console.cloud.google.com/run/detail/asia-northeast1/dream-fortune-telling/revisions?project=dream-fortune-telling&inv=1&invt=AbtYkA
 ```
+
+開発しないので Artifact Registry API 削除済み
